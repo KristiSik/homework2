@@ -10,6 +10,11 @@ namespace ConsoleApplication1
             _name = name;
             Console.WriteLine("Created new Lion " + name);
         }
+
+        public Lion()
+        {
+            // TODO: Complete member initialization
+        }
         public override string ToString()
         {
             return "lion";

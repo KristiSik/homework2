@@ -5,10 +5,10 @@ namespace ConsoleApplication1.Commands
 {
     public class CreateAnimal : ICommand
     {
-        public void Execute(Dictionary<string, Animal> animaltypes, ref List<Animal> aliveanimals, ref List<Animal> deadanimals)
+        public void Execute(ref Zoo logic)
         {
             Console.WriteLine("Enter type of new animal: ");
-            foreach(var type in animaltypes)
+            foreach (var type in logic._animaltypes)
             {
                 Console.WriteLine(type.Key + " - " + type.Value);
             }
@@ -16,7 +16,7 @@ namespace ConsoleApplication1.Commands
             do
             {
                 typeOfAnimal = Console.ReadLine();
-            } while (!(animaltypes.ContainsKey(typeOfAnimal)));
+            } while (!(logic._animaltypes.ContainsKey(typeOfAnimal)));
             string name;
             bool nameInUse;
             do
@@ -24,7 +24,7 @@ namespace ConsoleApplication1.Commands
                 Console.Write("Enter name of new animal: ");
                 name = Console.ReadLine();
                 nameInUse = false;
-                foreach (Animal animal in aliveanimals)
+                foreach (Animal animal in logic.aliveAnimals)
                 {
                     if (animal.Name == name)
                     {
@@ -35,7 +35,7 @@ namespace ConsoleApplication1.Commands
                 }
                 if (!nameInUse)
                 {
-                    foreach (Animal animal in deadanimals)
+                    foreach (Animal animal in logic.deadAnimals)
                     {
                         if (animal.Name == name)
                         {
@@ -47,8 +47,8 @@ namespace ConsoleApplication1.Commands
                 }
             } while (nameInUse);
 
-            object newanimal = Activator.CreateInstance(animaltypes[typeOfAnimal].GetType(), name);
-            aliveanimals.Add((Animal) newanimal);
+            object newanimal = Activator.CreateInstance(logic._animaltypes[typeOfAnimal].GetType(), name);
+            logic.aliveAnimals.Add((Animal)newanimal);
         }
         public override string ToString()
         {

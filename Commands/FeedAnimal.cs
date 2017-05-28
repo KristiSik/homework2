@@ -5,11 +5,11 @@ namespace ConsoleApplication1.Commands
 {
     public class FeedAnimal : ICommand
     {
-        public void Execute(Dictionary<string, Animal> animaltypes, ref List<Animal> aliveanimals, ref List<Animal> deadanimals)
+        public void Execute(ref Zoo logic)
         {
             Console.Write("Enter name of animal to feed: ");
             string name = Console.ReadLine();
-            foreach (Animal animal in aliveanimals)
+            foreach (Animal animal in logic.aliveAnimals)
             {
                 if (animal.Name == name)
                 {

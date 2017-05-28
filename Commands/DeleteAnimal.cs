@@ -5,15 +5,15 @@ namespace ConsoleApplication1.Commands
 {
     public class DeleteAnimal : ICommand
     {
-        public void Execute(Dictionary<string, Animal> animaltypes, ref List<Animal> aliveanimals, ref List<Animal> deadanimals)
+        public void Execute(ref Zoo logic)
         {
             Console.Write("Enter name of animal to delete: ");
             string name = Console.ReadLine();
-            foreach (Animal animal in deadanimals)
+            foreach (Animal animal in logic.deadAnimals)
             {
                 if (animal.Name == name)
                 {
-                    deadanimals.Remove(animal);
+                    logic.deadAnimals.Remove(animal);
                     name = "";
                     break;
                 }
